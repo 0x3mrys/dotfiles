@@ -46,7 +46,15 @@ require('nightfox').setup({
         bg3 = "#1d1d1d",
     }
   },
-  specs = {},
+  specs = {
+    carbonfox = {
+        diff = {
+            add = "NONE",
+            change = "NONE",
+            delete = "NONE",
+        }
+    }
+  },
   groups = {},
 })
 

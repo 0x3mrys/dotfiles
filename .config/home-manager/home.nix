@@ -26,16 +26,8 @@
   ];
 
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
+    ".config/nvim".source = builtins.toString ../nvim;
+    ".tmux.conf".source = ../../.tmux.conf;
   };
 
   # Home Manager can also manage your environment variables through
@@ -54,12 +46,19 @@
   #
   #  /etc/profiles/per-user/badral/etc/profile.d/hm-session-vars.sh
   #
+
+  services.ssh-agent.enable = true;
   programs.bash = {
     enable = true;
     shellAliases = {
       vi = "nvim";
-      vim = "nvim"; # (optional) also alias vim to nvim
+      vim = "nvim";
+      grep = "grep --color=auto";
     };
+    bashrcExtra = ''
+      ssh-add ~/.ssh/id_ed25519_emrys 2>/dev/null
+      ssh-add ~/.ssh/id_ed25519 2>/dev/null
+    '';
   };
   programs.fd = {
     enable = true;
