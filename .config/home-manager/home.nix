@@ -28,6 +28,7 @@
 
   home.file = {
     ".config/nvim".source = builtins.toString ../nvim;
+    ".config/kitty".source = builtins.toString ../kitty;
     ".tmux.conf".source = ../../.tmux.conf;
   };
 
